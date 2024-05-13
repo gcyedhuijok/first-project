@@ -1,2 +1,4 @@
-const deepFlatten = (arr) =>
-  [].concat(...arr.map((v) => (Array.isArray(v) ? deepFlatten(v) : v)));
+const dropRightWhile = (arr, func) => {
+  while (arr.length > 0 && !func(arr[arr.length - 1])) arr = arr.slice(0, -1);
+  return arr;
+};

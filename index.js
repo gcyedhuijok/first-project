@@ -1,15 +1,16 @@
-function removeNthFromEnd(head, n) {
-  const dummy = new ListNode(0);
-  dummy.next = head;
-  let first = dummy;
-  let second = dummy;
-  for (let i = 0; i <= n; i++) {
-    first = first.next;
+const countingSort = (arr) => {
+  const min = Math.min(...arr);
+  const max = Math.max(...arr);
+  const count = Array(max - min + 1).fill(0);
+  for (let num of arr) {
+    count[num - min]++;
   }
-  while (first !== null) {
-    first = first.next;
-    second = second.next;
+  let sortedIndex = 0;
+  for (let i = min; i <= max; i++) {
+    while (count[i - min] > 0) {
+      arr[sortedIndex++] = i;
+      count[i - min]--;
+    }
   }
-  second.next = second.next.next;
-  return dummy.next;
-}
+  return arr;
+};
